@@ -9,13 +9,27 @@
 // 📜 1. 전역 변수 및 상수 (Global Variables & Constants)
 // ==================================================
 
-// --- 1.1 공통 설정 (A, B 모두 사용) ---
+// 1.1 공통 설정(DOM 요소) (A, B 모두 사용)
 /** @type {HTMLCanvasElement} */
 const canvas = document.getElementById('gameCanvas'); // 캔버스 요소
 /** @type {CanvasRenderingContext2D} */
 const ctx = canvas.getContext('2d'); // 캔버스 2D 컨텍스트 (펜)
 /** @type {number} */
 const gridSize = 20; // 게임 보드 한 칸(셀)의 크기 (px)
+
+// 화면
+const startScreenEl = document.getElementById('startScreen'); // 시작 화면 요소
+const gameScreenEl = document.getElementById('gameScreen'); // 게임 화면 요소
+const gameOverScreenEl = document.getElementById('gameOverScreen'); // 게임 오버 화면 요소
+
+// 버튼
+const startButtonEl = document.getElementById('startButton'); // 게임 시작 버튼 요소
+const restartButtonEl = document.getElementById('restartButton'); // 게임 재시작 버튼 요소
+const exitBUttonEl = document.getElementById('exitButton'); // 게임 종료 버튼 요소
+
+// 점수
+const playScoreEl = document.getElementById('playScore'); // 게임 중 점수 
+const gameOverScoreEl = document.getElementById('gameOverScore'); // 게임 오버 점수
 
 // --- 1.2 게임 상태 (B: Environment 담당) ---
 /** @type {object} - 예: {x: 10 * gridSize, y: 10 * gridSize} */
@@ -29,7 +43,9 @@ let gameInterval; // setInterval ID (게임 루프 제어용)
 
 // --- 1.3 플레이어 상태 (A: Player 담당) ---
 /** @type {array} - 예: [{x: 10*gridSize, y: 10*gridSize}] */
-let snake = []; // 뱀 몸통 좌표 배열 (0번 인덱스가 머리)
+let snake = [
+    {x : 12 * grdqidSize, y: 12 * gridSize}
+]; // 뱀 몸통 좌표 배열 (0번 인덱스가 머리)
 /** @type {number} */
 let dx = gridSize; // 뱀의 수평(x) 이동 방향 (20, -20, 0)
 /** @type {number} */
@@ -97,8 +113,21 @@ function checkFoodCollision() {
 /**
  * 뱀(snake 배열)을 캔버스에 그립니다. (A 담당)
  */
+
+// segment: 현재 순서의 "몸통 칸" 정보가 들어가는 변수
+// index: 그 칸이 몇 번째 칸인지 알려주는 숫자(0부터 시작)
 function drawSnake() {
-    // ... A가 구현 ...
+    snake.forEach((segment, index) => {
+    if(index === 0) {
+        ctx.fillStyle = '#5c4364ff'; // 뱀 머리 색상
+    } else {
+        ctx.fillStyle = '#a372b1ff'; // 뱀 몸통 색상
+    }
+    ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
+
+    ctx.strokeStyle = '#322637ff'; // 뱀 테두리 색상
+    ctx.strokeRect(segment.x, segment.y, gridSize, gridSize);
+});
 }
 
 /**

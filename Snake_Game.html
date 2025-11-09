@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="Snake_Game.css">
+</head>
+<body>
+    <!-- 시작 화면 -->
+    <div id="startScreen">
+        <h1 class="gameTitle"> Snake </h1>
+        <div class="buttonContainer">
+            <!-- 시작 버튼 -->
+            <button id ="startButton" class="button"> 시작하기 </button>  
+        </div>
+    </div>
+
+
+    <!-- 플레이 화면 -->
+    <!-- 처음에 숨겨져 있다가 게임 시작 시 보여짐(hidden) -->
+     <div id="gameScreen" class="hidden">
+
+        <!-- 위 상단 진한 녹색 부분 -->
+        <div class="scoreBoard">  
+            <span class="apple">(사과 이미지)</span> 점수 : <span id="playScore">0</span>
+        </div>    
+
+        <!-- 게임 화면 감싸는 녹색 부분 -->
+        <div id="gameContainer">
+
+            <!-- 게임 화면 (연두색 부분) -->
+            <canvas id="gameCanvas" width="800" height="700"></canvas>
+        </div>
+     </div>
+
+    
+     <!-- 종료 화면 -->
+      <!-- 처음에 숨겨져 있다가 게임 종료 시 보여짐(hidden) -->
+     <div id="gameOverScreen" class="hidden">
+        <h1 class="gameTitle"> Snake </h1>
+
+        <!-- 게임 종료 후 점수 표시 -->
+        <div class="gameOverScoreBoard">
+            점수 : <span id="gameOverScore">0</span>
+        </div>
+
+        <!-- 다시 시작 및 나가기 버튼 -->
+        <div class="buttonContainer">
+            <button id="restartButton"> 다시 시작 </button>
+            <button id="exitButton"> 나가기 </button>
+        </div>
+     </div>
+
+      <script src="Snake_Game.js" defer></script>   <!-- defer: HTML 문서를 먼저 다 보여주고, 그 후에 script.js 파일을 실행 -->
+</body>
+</html>
