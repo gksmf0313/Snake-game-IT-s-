@@ -17,6 +17,9 @@ const ctx = canvas.getContext('2d'); // 캔버스 2D 컨텍스트 (펜)
 /** @type {number} */
 const gridSize = 20; // 게임 보드 한 칸(셀)의 크기 (px)
 
+const foodImg = new Image();
+foodImg.src = "apple.png";
+
 // 화면
 const startScreenEl = document.getElementById('startScreen'); // 시작 화면 요소
 const gameScreenEl = document.getElementById('gameScreen'); // 게임 화면 요소
@@ -25,7 +28,7 @@ const gameOverScreenEl = document.getElementById('gameOverScreen'); // 게임 �
 // 버튼
 const startButtonEl = document.getElementById('startButton'); // 게임 시작 버튼 요소
 const restartButtonEl = document.getElementById('restartButton'); // 게임 재시작 버튼 요소
-const exitBUttonEl = document.getElementById('exitButton'); // 게임 종료 버튼 요소
+const exitButtonEl = document.getElementById('exitButton'); // 게임 종료 버튼 요소
 
 // 점수
 const playScoreEl = document.getElementById('playScore'); // 게임 중 점수 
@@ -44,7 +47,7 @@ let gameInterval; // setInterval ID (게임 루프 제어용)
 // --- 1.3 플레이어 상태 (A: Player 담당) ---
 /** @type {array} - 예: [{x: 10*gridSize, y: 10*gridSize}] */
 let snake = [
-    {x : 12 * grdqidSize, y: 12 * gridSize}
+    {x : 12 * gridSize, y: 12 * gridSize}
 ]; // 뱀 몸통 좌표 배열 (0번 인덱스가 머리)
 /** @type {number} */
 let dx = gridSize; // 뱀의 수평(x) 이동 방향 (20, -20, 0)
@@ -66,6 +69,12 @@ let isGameOver = false; // 게임 오버 여부
  */
 function initGame() {
     // ... B가 구현 ...
+    // 게임 초기화
+    snake = [{x: 12 * gridSize, y: 12 * gridSize}] //뱀 위치 초기화
+    dx = gridSize; //뱀 방향 초기화
+    dy = 0;
+    score = 0; //점수 초기화
+    isGameOver = false; // 게임 결과 초기화
 }
 
 /**
@@ -74,6 +83,14 @@ function initGame() {
  */
 function gameLoop() {
     // ... B가 구현 ...
+    // 캔버스 초기화
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //먹이 그리기
+    drawFood();
+
+    //뱀 그리기
+    drawSnake();
 }
 
 /**
@@ -81,6 +98,7 @@ function gameLoop() {
  */
 function drawFood() {
     // ... B가 구현 ...
+    ctx.drawImage(foodImg, food.x, food.y, gridSize, gridSize);
 }
 
 /**
@@ -88,6 +106,25 @@ function drawFood() {
  */
 function generateFood() {
     // ... B가 구현 ...
+    //랜덤 위치에 먹이 생성(뱀이랑 겹치지 않게)
+    let foodX, foodY, isFoodonSnake;
+
+    //그리드 좌표 생성
+    const maxX = canvas.width / gridSize;
+    const maxY = canvas.height / gridSize;
+
+    do {
+        // 0 ~ (maxX-1) 사이의 정수 * 20 (gridSize)
+        foodX = Math.floor(Math.random() * maxX) * gridSize;
+        foodY = Math.floor(Math.random() * maxY) * gridSize;
+
+        // 뱀의 좌표와 새 먹이 좌표가 겹치는지 확인
+        isFoodOnSnake = snake.some(
+            (segment) => segment.x === foodX && segment.y === foodY
+        );
+    } 
+    while (isFoodOnSnake); // 겹쳤으면(true) 새 좌표 다시 뽑기
+    food = { x: foodX, y: foodY };
 }
 
 /**
@@ -156,4 +193,14 @@ function handleKeyDown(event) {
 document.addEventListener('keydown', handleKeyDown);
 
 // 게임 시작! (B 담당)
-initGame();
+startButtonEl.addEventListener('click', initGame);
+
+// 다시 시작
+restartButtonEl.addEventListener('click', initGame);
+
+// 나가기 누르면 시작화면으로 이동
+exitButtonEl.addEventListener('click', () => {
+    gameScreenEl.classList.add('hidden');
+    gameOverScreenEl.classList.add('hidden');
+    startScreenEl.classList.remove('hidden');
+});

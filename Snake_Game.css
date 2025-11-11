@@ -1,0 +1,91 @@
+/* 전체 페이지 설정 */
+body {
+  background-color: #292C33;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif; 
+  margin: 0;
+
+  /* 중앙 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* 화면 전환 */
+.hidden {
+  display: none;
+}
+
+/* 시작, 종료 화면 공통 */
+.gameTitle {
+  font-size: 5em;
+  margin-bottom: 20px;
+}
+
+/* 버튼 */
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+}
+
+/* 시작, 종료 화면의 버튼 공통 */
+#startButton, #restartButton, #exitButton {
+  font-size: 1.5em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: #D9D9D9;
+  color: #000000;
+  cursor: pointer; /*마우스 올리면 손가락 모양*/
+}
+
+/* 플레이 화면 상단 점수판 */
+#gameScreen .scoreBoard {
+  width: 940px; 
+  padding: 15px 0;
+  background-color: #4a752c;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; 
+  box-sizing: border-box; 
+}
+
+/* 먹이 크기 */
+.AppleImg {
+    width: 25px; 
+    height: 25px;
+}
+
+/* 플레이 화면 캔버스 감싸는 영역 */
+#gameScreen #gameContainer {
+    padding: 20px;
+    background-color: #487737;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 900px;
+    box-sizing: border-box;
+}
+
+/* 캔버스 */
+canvas {
+  background-color: #70A84D;
+  display: block;
+}
+
+/* 종료 화면 */
+#gameOverScreen {
+  text-align: center;
+}
+.gameOverScoreBoard {
+  font-size: 2em;
+  margin: 30px 0;
+}
