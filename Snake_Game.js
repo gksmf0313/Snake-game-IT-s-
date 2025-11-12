@@ -74,7 +74,25 @@ function initGame() {
     dx = gridSize; //뱀 방향 초기화
     dy = 0;
     score = 0; //점수 초기화
-    isGameOver = false; // 게임 결과 초기화
+    isGameOver = false; // 게임 결과 초기화\
+
+    playScoreEl.textContent = score; // 점수판 UI 업데이트
+
+    // 화면 전환
+    startScreenEl.classList.add('hidden');
+    gameOverScreenEl.classList.add('hidden'); // 재시작
+    gameScreenEl.classList.remove('hidden');
+
+    // 실행 중인 게임 루프가 있다면 정지지
+    if (gameInterval) {
+        clearInterval(gameInterval);
+    }
+
+    // 첫 먹이 생성
+    generateFood(); 
+    
+    // 게임 루프를 gameSpeed마다 반복 실행
+    gameInterval = setInterval(gameLoop, gameSpeed);
 }
 
 /**
