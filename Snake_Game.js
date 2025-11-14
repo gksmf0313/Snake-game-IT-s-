@@ -15,7 +15,7 @@ const canvas = document.getElementById('gameCanvas'); // 캔버스 요소
 /** @type {CanvasRenderingContext2D} */
 const ctx = canvas.getContext('2d'); // 캔버스 2D 컨텍스트 (펜)
 /** @type {number} */
-const gridSize = 50; // 게임 보드 한 칸(셀)의 크기 (px)
+const gridSize = 50; // 게임 보드 한 칸(셀)의 크기 (px) => figma 크기에 맞춰서 50px로 조절
 
 const foodImg = new Image();
 foodImg.src = "apple.png";
