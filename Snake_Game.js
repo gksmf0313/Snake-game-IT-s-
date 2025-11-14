@@ -15,7 +15,7 @@ const canvas = document.getElementById('gameCanvas'); // 캔버스 요소
 /** @type {CanvasRenderingContext2D} */
 const ctx = canvas.getContext('2d'); // 캔버스 2D 컨텍스트 (펜)
 /** @type {number} */
-const gridSize = 20; // 게임 보드 한 칸(셀)의 크기 (px)
+const gridSize = 50; // 게임 보드 한 칸(셀)의 크기 (px)
 
 const foodImg = new Image();
 foodImg.src = "apple.png";
@@ -95,12 +95,31 @@ function initGame() {
     gameInterval = setInterval(gameLoop, gameSpeed);
 }
 
+//게임 오버 처리
+function handleGameOver(){
+    //게임 루프 정지
+    clearInterval(gameInterval);
+
+    //게임 오버하면 점수판 업데이트
+    gameOverScoreEl.textContent = score;
+    
+    //화면 전환
+    gameScreenEl.classList.add('hidden');
+    gameOverScreenEl.classList.remove('hidden');
+}
+
 /**
  * 게임의 메인 루프입니다. (B 담당)
  * (게임 상태 업데이트 및 그리기 반복)
  */
 function gameLoop() {
     // ... B가 구현 ...
+    //게임 오버 상태 확인
+    if(isGameOver){
+        handleGameOver();
+        return;
+    }
+
     // 캔버스 초기화
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -108,6 +127,27 @@ function gameLoop() {
     drawFood();
 
     //뱀 그리기
+    drawSnake();
+    
+    //뱀 이동
+    moveSnake();
+
+    //충돌 확인
+    if(checkWallCollision() || checkSelfCollision()){
+        isGameOver = true; //충돌하면 게임 오버
+    }
+
+    //점수 추가
+    if(checkFoodCollision()){
+        score += 10;
+        playScoreEl.textContent = score; //점수 UI
+        generateFood(); //새 먹이 생성
+    }
+    else{
+        snake.pop(); //먹이 안 먹으면 마지막 꼬리 칸 제거
+    }
+    
+    drawFood();
     drawSnake();
 }
 
@@ -141,7 +181,7 @@ function generateFood() {
             (segment) => segment.x === foodX && segment.y === foodY
         );
     } 
-    while (isFoodOnSnake); // 겹쳤으면(true) 새 좌표 다시 뽑기
+    while(isFoodOnSnake); // 겹쳤으면(true) 새 좌표 다시 뽑기
     food = { x: foodX, y: foodY };
 }
 
@@ -151,7 +191,15 @@ function generateFood() {
  */
 function checkWallCollision() {
     // ... B가 구현 ...
-    return false;
+    const head = snake[0]; //뱀 머리
+
+    //뱀 머리가 벽에 충돌하는지 확인
+    const hitLeftWall = head.x < 0;
+    const hitRightWall = head.x >= canvas.width;
+    const hitTopWall = head.y < 0;
+    const hitBottomWall = head.y >= canvas.height;
+    
+    return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
 }
 
 /**
@@ -160,7 +208,8 @@ function checkWallCollision() {
  */
 function checkFoodCollision() {
     // ... B가 구현 ...
-    return false;
+    const head = snake[0]; //뱀 머리
+    return head.x === food.x && head.y === food.y;
 }
 
 // --- 2.2 (A) 플레이어 함수 (Player Functions) ---
