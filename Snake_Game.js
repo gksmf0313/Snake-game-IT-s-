@@ -74,7 +74,7 @@ function initGame() {
     dx = gridSize; //뱀 방향 초기화
     dy = 0;
     score = 0; //점수 초기화
-    isGameOver = false; // 게임 결과 초기화\
+    isGameOver = false; // 게임 결과 초기화
 
     playScoreEl.textContent = score; // 점수판 UI 업데이트
 
@@ -83,7 +83,7 @@ function initGame() {
     gameOverScreenEl.classList.add('hidden'); // 재시작
     gameScreenEl.classList.remove('hidden');
 
-    // 실행 중인 게임 루프가 있다면 정지지
+    // 실행 중인 게임 루프가 있다면 정지
     if (gameInterval) {
         clearInterval(gameInterval);
     }
@@ -171,6 +171,23 @@ function checkFoodCollision() {
 
 // segment: 현재 순서의 "몸통 칸" 정보가 들어가는 변수
 // index: 그 칸이 몇 번째 칸인지 알려주는 숫자(0부터 시작)
+ 
+
+// 뱀 움직임 구현
+function moveSnake(){
+    const head = {
+        // 새 머리의 좌표 계산
+        x : snake[0].x + dx,
+        y : snake[0].y + dy
+    };
+
+    // 뱀 몸통 배열의 앞에 새 머리 추가
+    snake.unshift(head);
+
+    //꼬리 제거 (원래 길이로 유지)
+    // snake.pop();
+}
+
 function drawSnake() {
     snake.forEach((segment, index) => {
     if(index === 0) {
@@ -190,7 +207,16 @@ function drawSnake() {
  * @returns {boolean} 충돌했다면 true
  */
 function checkSelfCollision() {
-    // ... A가 구현 ...
+   const head = snake[0]; // 뱀 머리 좌표
+
+   // 뱀 몸통(머리 제외)과 머리 좌표 비교
+   for (let i = 1; i < snake.length; i++) {
+        if(head.x === snake[i].x && head.y === snake[i].y){
+            return true;
+        }
+   }
+
+   // 충돌 없음
     return false;
 }
 
@@ -200,7 +226,31 @@ function checkSelfCollision() {
  * @param {KeyboardEvent} event
  */
 function handleKeyDown(event) {
-    // ... A가 구현 ...
+    // 현재 이동 방향 확인
+    const goingUP = (dy === -gridSize);  
+    const goingDown = (dy === gridSize);
+    const goingLeft = (dx === -gridSize);
+    const goingRight = (dx === gridSize);
+
+    // 방향키 또는 WASD 키 입력에 따라 방향 변경
+    // (단, 반대 방향인 경우는 무시)
+
+    if((event.key === 'ArrowUp' || event.key === 'w') && !goingDown){
+        dx = 0;
+        dy = -gridSize;
+    }
+    else if((event.key === 'ArrowDown' || event.key === 's') && !goingUP){
+        dx = 0;
+        dy = gridSize;
+    }
+    else if((event.key === 'ArrowLeft' || event.key === 'a') && !goingRight){
+        dx = -gridSize;
+        dy = 0;
+    }
+    else if((event.key === 'ArrowRight' || event.key === 'd') && !goingLeft){
+        dx = gridSize;
+        dy = 0;
+    }
 }
 
 // ==================================================
