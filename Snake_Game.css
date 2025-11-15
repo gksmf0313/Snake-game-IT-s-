@@ -34,10 +34,10 @@ body {
 }
 /* 마우스 올렸을 때 살짝 어둡게 */
 .button:hover {
-  background-color: #c0c0c0;
+  background-color: #939393;
 }
 
-/* 시작, 종료 화면의 버튼 공통 */
+/* 시작, 설명, 종료 화면의 버튼 공통 */
 #startButton, #restartButton, #exitButton,#helpButton {
   font-size: 2em;
   padding: 15px 30px;
@@ -99,7 +99,7 @@ body {
 
 /* 닫기 버튼(X) */
 #closeScreenButton{
-  position: absolute; /* 흰색 박스 기준으로 배치 */
+  position: absolute; /* 밝은 회색 박스 기준으로 배치 */
   top: 25px;
   right: 35px;
   font-size: 50px;
