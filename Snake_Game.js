@@ -34,6 +34,11 @@ const exitButtonEl = document.getElementById('exitButton'); // 게임 종료 버
 const playScoreEl = document.getElementById('playScore'); // 게임 중 점수 
 const gameOverScoreEl = document.getElementById('gameOverScore'); // 게임 오버 점수
 
+const helpButtonEl = document.getElementById('helpButton'); // 설명 버튼
+const helpScreenEl = document.getElementById('helpScreen'); // 설명 화면 창창
+const closeScreenButtonEl = document.getElementById('closeScreenButton'); // 설명 닫기 버튼
+const backgroundScreenEl = document.querySelector('.backgroundScreen'); // 설명 화면 뒷 배경
+
 // --- 1.2 게임 상태 (B: Environment 담당) ---
 /** @type {object} - 예: {x: 10 * gridSize, y: 10 * gridSize} */
 let food = {}; // 먹이 객체 (x, y 좌표)
@@ -120,9 +125,6 @@ function gameLoop() {
         return;
     }
 
-    // 캔버스 초기화
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     //먹이 그리기
     drawFood();
 
@@ -147,6 +149,8 @@ function gameLoop() {
         snake.pop(); //먹이 안 먹으면 마지막 꼬리 칸 제거
     }
     
+    // 캔버스 초기화
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFood();
     drawSnake();
 }
@@ -321,3 +325,15 @@ exitButtonEl.addEventListener('click', () => {
     gameOverScreenEl.classList.add('hidden');
     startScreenEl.classList.remove('hidden');
 });
+
+// 설명 화면 보기
+helpButtonEl.addEventListener('click', () => {
+    helpScreenEl.classList.remove('hidden'); 
+});
+
+// 설명 화면 닫기
+closeScreenButtonEl.addEventListener('click', () => {
+    helpScreenEl.classList.add('hidden'); 
+});
+
+alert("JS 파일이 연결되었습니다!");
