@@ -12,7 +12,26 @@
         <h1 class="gameTitle"> Snake </h1>
         <div class="buttonContainer">
             <!-- 시작 버튼 -->
-            <button id ="startButton" class="button"> 시작하기 </button>  
+            <button id ="startButton" class="button"> 시작하기 </button>
+            
+            <!-- 설명 버튼  -->
+             <button id = helpButton class="button"> 설명 </button>
+        </div>
+    </div>
+
+    <!-- 설명 화면 -->
+     <div id = "helpScreen" class = hidden>
+        <!-- 설명 글 뒷 배경 -->
+        <div class = "backgroundScreen"></div>
+
+        <!-- 설명 내용물 -->
+        <div class = "backgroundContent">
+            <!-- 닫기 버튼 (X) -->
+            <div id = "closeScreenButton">X</div>
+
+            <p>방향키(↑, ↓, ←, →)로 뱀을 조종하여 화면에 나타나는 먹이를 먹으세요.</p>
+            <p>먹이를 먹을 때마다 뱀이 길어지고 점수가 오릅니다.</p>
+            <p>벽이나 자기 자신의 몸통에 부딪히면 게임이 종료되니 조심하세요!</p>
         </div>
     </div>
 

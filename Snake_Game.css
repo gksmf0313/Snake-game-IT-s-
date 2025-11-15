@@ -20,25 +20,97 @@ body {
 
 /* 시작, 종료 화면 공통 */
 .gameTitle {
-  font-size: 5em;
+  font-size: 8em;
   margin-bottom: 20px;
 }
 
 /* 버튼 */
 .buttonContainer {
   display: flex;
+  flex-direction: column;
   gap: 20px;
+  align-items: center;
+  width: 377px;
+}
+/* 마우스 올렸을 때 살짝 어둡게 */
+.button:hover {
+  background-color: #c0c0c0;
 }
 
 /* 시작, 종료 화면의 버튼 공통 */
-#startButton, #restartButton, #exitButton {
-  font-size: 1.5em;
+#startButton, #restartButton, #exitButton,#helpButton {
+  font-size: 2em;
   padding: 15px 30px;
   border: none;
   border-radius: 10px;
   background-color: #D9D9D9;
   color: #000000;
   cursor: pointer; /*마우스 올리면 손가락 모양*/
+
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 설명 화면(보이지 않음, 위치 정렬) */
+#helpScreen {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 설명 화면 전체 뒷 배경 */
+.backgroundScreen {
+ position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color: rgba(70, 70, 70, 0.7); /* 반투명 검정 배경 */
+}
+
+/* 설명 화면(보이는 밝은 회색 박스) */
+.backgroundContent {
+  background-color: rgba(187, 187, 187, 0.7);
+  padding: 90px;
+  width: 950px;
+  height: 950px;
+  border-radius: 50px 0px 50px 50px;
+  position: relative;
+  z-index: 10;
+  text-align: left;
+  line-height: 1.7;
+  color: black;
+  font-size: 3.0rem;
+  font-weight: bold;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0,0.5);
+  box-sizing: border-box;
+}
+
+/* 문단 사이 간격 */
+.backgroundContent p {
+  margin-bottom: 90px; 
+}
+
+/* 닫기 버튼(X) */
+#closeScreenButton{
+  position: absolute; /* 흰색 박스 기준으로 배치 */
+  top: 25px;
+  right: 35px;
+  font-size: 50px;
+  font-weight: bold;
+  color: #505050;
+  cursor: pointer;
+}
+
+/* 마우스 올리면 검은색으로 진하게 */
+#closeScreenButton:hover {
+  color: #000; 
 }
 
 /* 플레이 화면 상단 점수판 */
