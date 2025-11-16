@@ -35,7 +35,7 @@ const playScoreEl = document.getElementById('playScore'); // 게임 중 점수
 const gameOverScoreEl = document.getElementById('gameOverScore'); // 게임 오버 점수
 
 const helpButtonEl = document.getElementById('helpButton'); // 설명 버튼
-const helpScreenEl = document.getElementById('helpScreen'); // 설명 화면 창창
+const helpScreenEl = document.getElementById('helpScreen'); // 설명 화면 창
 const closeScreenButtonEl = document.getElementById('closeScreenButton'); // 설명 닫기 버튼
 const backgroundScreenEl = document.querySelector('.backgroundScreen'); // 설명 화면 뒷 배경
 
@@ -335,5 +335,3 @@ helpButtonEl.addEventListener('click', () => {
 closeScreenButtonEl.addEventListener('click', () => {
     helpScreenEl.classList.add('hidden'); 
 });
-
-alert("JS 파일이 연결되었습니다!");
