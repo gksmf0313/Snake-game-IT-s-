@@ -261,14 +261,12 @@ function drawSnake() {
  */
 function checkSelfCollision() {
    const head = snake[0]; // 뱀 머리 좌표
-
    // 뱀 몸통(머리 제외)과 머리 좌표 비교
    for (let i = 1; i < snake.length; i++) {
         if(head.x === snake[i].x && head.y === snake[i].y){
             return true;
         }
    }
-
    // 충돌 없음
     return false;
 }
