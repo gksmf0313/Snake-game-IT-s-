@@ -335,5 +335,3 @@ helpButtonEl.addEventListener('click', () => {
 closeScreenButtonEl.addEventListener('click', () => {
     helpScreenEl.classList.add('hidden'); 
 });
-
-alert("JS 파일이 연결되었습니다!");
