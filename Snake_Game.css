@@ -15,7 +15,7 @@ body {
 
 /* 화면 전환 */
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* 시작, 종료 화면 공통 */
@@ -33,8 +33,11 @@ body {
   width: 377px;
 }
 /* 마우스 올렸을 때 살짝 어둡게 */
-.button:hover {
-  background-color: #939393;
+#startButton:hover, 
+#restartButton:hover, 
+#exitButton:hover, 
+#helpButton:hover {
+  background-color: #9a9a9a;
 }
 
 /* 시작, 설명, 종료 화면의 버튼 공통 */
@@ -75,7 +78,7 @@ body {
   left:0;
   width:100%;
   height:100%;
-  background-color: rgba(70, 70, 70, 0.7); /* 반투명 검정 배경 */
+  background-color: rgba(41, 44, 51,0.5);
 }
 
 /* 설명 화면(보이는 밝은 회색 박스) */
