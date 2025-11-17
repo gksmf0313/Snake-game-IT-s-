@@ -333,3 +333,5 @@ helpButtonEl.addEventListener('click', () => {
 closeScreenButtonEl.addEventListener('click', () => {
     helpScreenEl.classList.add('hidden'); 
 });
+
+alert("dfsd");
